@@ -1,5 +1,5 @@
 class SortedList {
-  constructor(items) {
+  constructor() {
     this.items = [];
     this.length = 0;
   }
@@ -14,7 +14,7 @@ class SortedList {
     if (this.items.indexOf(pos) === -1) {
       throw new Error('OutOfBounds');
     } else {
-      return this.items.indexOf(pos);
+      return this.items[pos];
     }
   }
 
@@ -23,16 +23,18 @@ class SortedList {
       throw new Error('EmptySortedList');
     } else {
       // return Math.max(...this.items);
-      return this.items.pop();
+      // return this.items.pop();  // mutates the array
+      return this.items[this.items.length - 1]; // no mutation of array
     }
   }
 
   min() {
-    if (this.items.length === 0) {
+    if (!this.length) {
       throw new Error('EmptySortedList');
     } else {
       // return Math.min(...this.items);
-      return this.items.shift();
+      // return this.items.shift(); // mutates the array
+      return this.items[0]; // return value at index 0;
     }
   }
 
@@ -44,13 +46,10 @@ class SortedList {
   }
 
   avg() {
-    if (this.items.length === 0) {
+    if (!this.length) {
       throw new Error('EmptySortedList');
     } else {
-      const avgOfItems = this.items.reduce((accu, item) => {
-        return accu + item;
-      }, 0);
-      return avgOfItems / this.items.length;
+      return this.sum() / this.items.length;
     }
   }
 }
